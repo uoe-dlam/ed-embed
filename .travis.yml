@@ -20,23 +20,5 @@ php:
   - 7.1
 
 env:
-  - WP_VERSION=latest WP_MULTISITE=1
-  - WP_VERSION=latest WP_MULTISITE=0
-  - WP_VERSION=5.1 WP_MULTISITE=1
-  - WP_VERSION=5.1 WP_MULTISITE=0
-  - WP_VERSION=5.0 WP_MULTISITE=1
-  - WP_VERSION=5.0 WP_MULTISITE=0
   - WP_VERSION=4.9 WP_MULTISITE=1
   - WP_VERSION=4.9 WP_MULTISITE=0
-
-
-script:
-  - |
-    if [[ ! -z "$WP_VERSION" ]] ; then
-      phpunit --exclude-group multisite
-      WP_MULTISITE=1 phpunit --exclude-group singlesite
-    fi
-  - |
-    if [[ "$WP_TRAVISCI" == "phpcs" ]] ; then
-      phpcs
-    fi
