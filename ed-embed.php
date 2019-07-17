@@ -8,8 +8,6 @@ Version: 1.0
 
 $regex = ''; //The regex that will be used to see if this handler should be used for a URL. Please provide your data.
 
-// travis test
-
 require_once 'OpenGraph.php';
 require_once 'classes/class-ed-embed-init-cache.php';
 require_once 'classes/class-ed-embed-video-cache.php';
