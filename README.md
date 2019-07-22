@@ -12,7 +12,7 @@ This plugin converts Media Hopper links into video embeds in the WordPress TinyM
 
 ## Usage
 
-Edit the ed-embed.php file and provide your regex variable. The regex that will be used to see if this handler should be used for a URL. 
+Edit the ed-embed.php file and provide your $regex and $link variables.
 Copy and paste the Media Hooper video page url (not the video itself link) into the editor. The plugin should automatically recognize it and add the video.
 
 ## Requirements

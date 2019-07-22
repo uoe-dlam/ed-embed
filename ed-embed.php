@@ -6,16 +6,13 @@ Author: DLAM Applications Development Team
 Version: 1.0
 */
 
-$regex = ''; //The regex that will be used to see if this handler should be used for a URL. Please provide your data.
-
-// travis test
-
 require_once 'OpenGraph.php';
 require_once 'classes/class-ed-embed-init-cache.php';
 require_once 'classes/class-ed-embed-video-cache.php';
 
 
 function add_media_hopper_embed_handler() {
+	$regex = '#https://media.ed.ac.uk/media/*#i'; //The regex that will be used to see if this handler should be used for a URL. Please provide your data.
 	wp_embed_register_handler( 'mediahopper', $regex, 'media_hopper_embed_handler' );
 }
 
@@ -64,9 +61,9 @@ function custom_wp_trim_excerpt( $text = '' ) {
 	if ( '' == $text ) {
 		$text = get_the_content( '' );
 
-		$link = ''; //Please provide your data.
+		$link = '#https://media.ed.ac.uk/media/[^\s]+#i'; //Please provide your data.
 		
-		$text = preg_replace( '#h'.$link.'[^\s]+#i', '', $text );
+		$text = preg_replace( $link, '', $text );
 
 		$text = strip_shortcodes( $text );
 
