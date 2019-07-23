@@ -7,20 +7,6 @@ class EmbedTest extends WP_UnitTestCase
         parent::setUp();
     }
 
-    public function test_initialise_mediahopper_table()
-    {
-        global $wpdb;
-
-        //log in as admin
-        self::login_as_admin();
-
-        (new Ed_Embed_Init_Cache())->initialise_mediahopper_table();
-        $table_name = $wpdb->base_prefix . 'mediahopper';
-        $result = $wpdb->insert($table_name, array('url'=>'test', 'iframe'=>'test'));
-
-        $this->assertEquals(1, $result);
-    }
-
     private function initialize_media_table()
     {
         global $wpdb;
@@ -45,4 +31,79 @@ class EmbedTest extends WP_UnitTestCase
             do_action( 'wp_login', $user->user_login );
         }
     }
+
+    public function test_initialise_mediahopper_table()
+    {
+        global $wpdb;
+        
+        //log in as admin
+        self::login_as_admin();
+
+        (new Ed_Embed_Init_Cache())->initialise_mediahopper_table();
+        $table_name = $wpdb->base_prefix . 'mediahopper';
+        $result = $wpdb->insert($table_name, array('url'=>'test', 'iframe'=>'test'));
+
+        $this->assertEquals(1, $result);
+    }
+
+    public function test_Ed_Embed_Video_Cache_get()
+    {
+        global $wpdb;
+
+        self::initialize_media_table();
+
+        $table_name = $wpdb->base_prefix . 'mediahopper';
+        $url = 'test_url';
+        $iframe = 'test_iframe';
+        $wpdb->insert($table_name, array('url'=>$url, 'iframe'=>$iframe));
+        $result = (new Ed_Embed_Video_Cache())->get($url);
+
+        $this->assertEquals('test_iframe', $result);
+    }
+
+    public function test_Ed_Embed_Video_Cache_save()
+    {
+        global $wpdb;
+
+        self::initialize_media_table();
+        $url = 'test_url';
+        $iframe = 'test_iframe';
+        (new Ed_Embed_Video_Cache())->save( $url, $iframe );
+
+        $result = $wpdb->get_row(
+            $wpdb->prepare(
+                'SELECT iframe FROM ' . $wpdb->base_prefix . 'mediahopper WHERE url = %d AND iframe= %s',
+                $url,
+                $iframe
+            )
+        );
+
+        $this->assertEquals('test_iframe', $result->iframe);
+    }
+
+
+    public function test_custom_wp_trim_excerpt_has_filter()
+    {
+        //$result = include_once( ABSPATH . 'wp-content/plugins/ed-embed/ed-embed.php' );
+        //include_once( WP_PLUGIN_DIR . '/ed-embed/ed-embed.php' );
+
+        $result = has_filter( 'get_the_excerpt', 'custom_wp_trim_excerpt' );
+
+        $this->assertEquals(10, $result);
+    }
+
+    public function test_custom_wp_trim_excerpt()
+    {
+        //$result = include_once( ABSPATH . 'wp-content/plugins/ed-embed/ed-embed.php' );
+        //include_once( WP_PLUGIN_DIR . '/ed-embed/ed-embed.php' );
+        
+        // $text = 'https://media.ed.ac.uk/media/Edinburgh+College+of+Art+Revels+1936%2C1945%2C1946+16mm+.mp4/1_92ew87aa';
+        $text = '';
+
+
+        $result = apply_filters( 'get_the_excerpt', $text );
+
+        $this->assertEquals(10, $result);
+    }
+    
 }

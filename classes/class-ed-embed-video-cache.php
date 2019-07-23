@@ -41,7 +41,7 @@ class Ed_Embed_Video_Cache {
 	 *
 	 * @param $url string
 	 * @param $iframe_html string
-	 * @return string|false
+	 * @return void
 	 */
 	public function save( $url, $iframe_html ) {
 		$this->wpdb->insert(
