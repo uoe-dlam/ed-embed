@@ -12,13 +12,14 @@ require_once 'classes/class-ed-embed-video-cache.php';
 
 
 function add_media_hopper_embed_handler() {
-	$regex = '#https://media.ed.ac.uk/media/*#i'; //The regex that will be used to see if this handler should be used for a URL. Please provide your data.
+	$regex = '#https://example.com/*#i'; //The regex that will be used to see if this handler should be used for a URL. Please provide your data.
 	wp_embed_register_handler( 'mediahopper', $regex, 'media_hopper_embed_handler' );
 }
 
 add_action( 'init', 'add_media_hopper_embed_handler' );
 
 function media_hopper_embed_handler( $matches, $attr, $url, $rawattr ) {
+// function media_hopper_embed_handler( $url ) {
 	try {
 		$ed_embed_video_cache = new Ed_Embed_Video_Cache();
 
@@ -61,7 +62,7 @@ function custom_wp_trim_excerpt( $text = '' ) {
 	if ( '' == $text ) {
 		$text = get_the_content( '' );
 
-		$link = '#https://media.ed.ac.uk/media/[^\s]+#i'; //Please provide your data.
+		$link = '#https://example.com/[^\s]+#i'; //Please provide your data.
 		
 		$text = preg_replace( $link, '', $text );
 

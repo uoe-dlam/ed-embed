@@ -81,29 +81,15 @@ class EmbedTest extends WP_UnitTestCase
         $this->assertEquals('test_iframe', $result->iframe);
     }
 
-
     public function test_custom_wp_trim_excerpt_has_filter()
     {
-        //$result = include_once( ABSPATH . 'wp-content/plugins/ed-embed/ed-embed.php' );
-        //include_once( WP_PLUGIN_DIR . '/ed-embed/ed-embed.php' );
-
         $result = has_filter( 'get_the_excerpt', 'custom_wp_trim_excerpt' );
-
-        $this->assertEquals(10, $result);
-    }
-
-    public function test_custom_wp_trim_excerpt()
-    {
-        //$result = include_once( ABSPATH . 'wp-content/plugins/ed-embed/ed-embed.php' );
-        //include_once( WP_PLUGIN_DIR . '/ed-embed/ed-embed.php' );
-        
-        // $text = 'https://media.ed.ac.uk/media/Edinburgh+College+of+Art+Revels+1936%2C1945%2C1946+16mm+.mp4/1_92ew87aa';
-        $text = '';
-
-
-        $result = apply_filters( 'get_the_excerpt', $text );
-
         $this->assertEquals(10, $result);
     }
     
+    public function test_media_hopper_embed_handler_init()
+    {
+        $result = has_action( 'init', 'add_media_hopper_embed_handler', 'mediahopper' );
+        $this->assertEquals(10, $result);
+    }
 }
