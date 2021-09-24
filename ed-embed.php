@@ -12,7 +12,7 @@ require_once 'classes/class-ed-embed-video-cache.php';
 
 
 function add_media_hopper_embed_handler() {
-	$regex = ''#https://media.ed.ac.uk/media/*#i';
+	$regex = '#https://media.ed.ac.uk/media/*#i';
 	wp_embed_register_handler( 'mediahopper', $regex, 'media_hopper_embed_handler' );
 }
 
