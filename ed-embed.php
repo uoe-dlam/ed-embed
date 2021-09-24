@@ -19,7 +19,6 @@ function add_media_hopper_embed_handler() {
 add_action( 'init', 'add_media_hopper_embed_handler' );
 
 function media_hopper_embed_handler( $matches, $attr, $url, $rawattr ) {
-// function media_hopper_embed_handler( $url ) {
 	try {
 		$ed_embed_video_cache = new Ed_Embed_Video_Cache();
 
