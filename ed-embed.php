@@ -12,7 +12,7 @@ require_once 'classes/class-ed-embed-video-cache.php';
 
 
 function add_media_hopper_embed_handler() {
-	$regex = '#https://example.com/*#i'; //The regex that will be used to see if this handler should be used for a URL. Please provide your data.
+	$regex = ''#https://media.ed.ac.uk/media/*#i';
 	wp_embed_register_handler( 'mediahopper', $regex, 'media_hopper_embed_handler' );
 }
 
