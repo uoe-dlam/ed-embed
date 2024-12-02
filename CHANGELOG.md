@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- Replaced iFrame with Video tag to fix the issue with incorrect embeding (PR #)
+- Replaced iFrame with Video tag to fix the issue with incorrect embeding (PR #3)
 
 ## [1.0.0] - 2019-07-12
 
