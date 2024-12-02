@@ -3,7 +3,7 @@
 Plugin Name: UoE Media Hopper Embed
 Description: Converts Media Hopper links into video embeds in the WordPress TinyMCE editor.
 Author: DLAM Applications Development Team
-Version: 1.0
+Version: 2.0
 */
 
 require_once 'OpenGraph.php';
@@ -28,7 +28,7 @@ function media_hopper_embed_handler($matches, $attr, $url, $rawattr) {
 
 		// get open graph tags for url
 		$openGraph = OpenGraph::fetch($url);
-        
+
 		// get open graph video url if one exists on the page
 		$video_url = $openGraph->getVideoUrl();
 
@@ -44,7 +44,6 @@ function media_hopper_embed_handler($matches, $attr, $url, $rawattr) {
 		return '';
 	}
 }
-
 
 /**
  * We pretty much just hijack wp_trim_excerpt below
