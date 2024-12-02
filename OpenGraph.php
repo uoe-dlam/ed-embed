@@ -183,14 +183,14 @@ class OpenGraph implements Iterator
     }
 
     /*
-     * Added by richard lawson. gets video url if one exists
+     * Gets video secure url, if one exists.
+     * 
+     * Added by Richard Lawson
+     * Updated by Arek Juszczyk (2024)
+     * 
      */
     public function getVideoUrl() {
-        $url = '';
-        if (isset($this->_values['video:secure_url'])) {
-            $url = $this->_values['video:secure_url'];
-        }
-        return $url;
+        return $this->_values['video:secure_url'] ?? '';
     }
 
     /**
